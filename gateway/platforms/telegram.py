@@ -715,6 +715,9 @@ class TelegramAdapter(BasePlatformAdapter):
 
             proxy_targets = ["api.telegram.org", *fallback_ips]
             proxy_url = resolve_proxy_url("TELEGRAM_PROXY", target_hosts=proxy_targets)
+            if proxy_url:
+                fallback_ips = []
+                proxy_targets = ["api.telegram.org"]
             if fallback_ips and not proxy_url and not disable_fallback:
                 logger.info(
                     "[%s] Telegram fallback IPs active: %s",
